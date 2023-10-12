@@ -10,13 +10,12 @@ repositories {
 }
 
 dependencies {
+    // histogramm diff
+    implementation("org.eclipse.jgit:org.eclipse.jgit:6.7.0.202309050840-r")
+
     testImplementation(kotlin("test"))
 }
 
 tasks.test {
     useJUnitPlatform()
-}
-
-kotlin {
-    jvmToolchain(8)
 }
