@@ -11,10 +11,10 @@ abstract class Task(val debug: Boolean = false) {
 		if (debug) {
 			val input = Files.readAllLines(Path.of("input/${index}_example.txt"))
 			val output = computeResult(input)
-			println("Task $index, example input: $output")
+			println("-----Task $index, example input-----\n$output\n-------------------------------")
 			val outputFile = "output/${index}_example.txt"
 			val expectedOutput = Files.lines(Path.of(outputFile)).collect(Collectors.joining("\n"))
-			println("\n----Diff----")
+			println("\n--------------Diff-------------")
 			Differ.printDiff(outputFile, output.toString(), expectedOutput)
 			return
 		}
@@ -23,7 +23,7 @@ abstract class Task(val debug: Boolean = false) {
 			val input = Files.readAllLines(Path.of("input/${index}_$i.txt"))
 			val output = computeResult(input)
 			Files.writeString(Path.of("output/${index}_$i.txt"), output.toString())
-			println("Task $index, input $i: $output")
+			println("--------Task $index, input $i--------\n$output\n-------------------------------")
 		}
 	}
 
