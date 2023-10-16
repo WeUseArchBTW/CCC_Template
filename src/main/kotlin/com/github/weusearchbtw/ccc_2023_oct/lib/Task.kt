@@ -8,8 +8,6 @@ abstract class Task(val debug: Boolean = false) {
 	private val index = this::class.simpleName!!.substringAfter("Task").toInt()
 
 	fun run() {
-
-
 		if (debug) {
 			runSubTask(index, "example")
 
