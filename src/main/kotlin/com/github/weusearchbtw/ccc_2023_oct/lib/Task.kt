@@ -9,16 +9,16 @@ abstract class Task(val debug: Boolean = false) {
 
 	fun run() {
 
-		runSubTask(index, "example")
 
 		if (debug) {
-			val input = Files.readAllLines(Path.of("input/level${index}_example.in"))
-			val output = computeResult(input)
-			println("-----Task $index, example input-----\n$output\n-------------------------------")
-			val outputFile = "output/level${index}_example.out"
-			val expectedOutput = Files.lines(Path.of(outputFile)).collect(Collectors.joining("\n"))
+			runSubTask(index, "example")
+
+			val expectedOutputFile = "expected/level${index}_expected.in"
+			val output = Files.readAllLines(Path.of("output/level${index}_example.out"))
+			val expectedOutputFallback = Files.lines(Path.of(expectedOutputFile)).collect(Collectors.joining("\n"))
+
 			println("\n--------------Diff-------------")
-			Differ.printDiff(outputFile, output.toString(), expectedOutput)
+			Differ.printDiff( expectedOutputFile, output.joinToString ("\n"), expectedOutputFallback)
 			return
 		}
 
