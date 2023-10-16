@@ -9,23 +9,29 @@ abstract class Task(val debug: Boolean = false) {
 
 	fun run() {
 		if (debug) {
-			val input = Files.readAllLines(Path.of("input/${index}_example.txt"))
-			val output = computeResult(input)
-			println("-----Task $index, example input-----\n$output\n-------------------------------")
-			val outputFile = "output/${index}_example.txt"
-			val expectedOutput = Files.lines(Path.of(outputFile)).collect(Collectors.joining("\n"))
+			runSubTask(index, "example")
+
+			val expectedOutputFile = "expected/level${index}_expected.in"
+			val outputFile = "output/level${index}_example.out"
+			val expectedOutputFallback = Files.lines(Path.of(expectedOutputFile)).collect(Collectors.joining("\n"))
+
 			println("\n--------------Diff-------------")
-			Differ.printDiff(outputFile, output.toString(), expectedOutput)
+			Differ.printDiff(expectedOutputFile, outputFile, expectedOutputFallback)
 			return
 		}
 
 		for (i in 0..<5) {
-			val input = Files.readAllLines(Path.of("input/${index}_$i.txt"))
-			val output = computeResult(input)
-			Files.writeString(Path.of("output/${index}_$i.txt"), output.toString())
-			println("--------Task $index, input $i--------\n$output\n-------------------------------")
+			runSubTask(index, i)
 		}
 	}
+
+	private fun runSubTask(level: Int, subTask: String) {
+		val input = Files.readAllLines(Path.of("input/level${level}_$subTask.in"))
+		val output = computeResult(input)
+		Files.writeString(Path.of("output/level${level}_$subTask.out"), output.toString())
+		println("--------Task $level, input $subTask--------\n$output\n-------------------------------")
+	}
+	private fun runSubTask(level: Int, subTask: Int) = runSubTask(level, subTask.toString())
 
 	internal abstract fun computeResult(input: Collection<String>): Any
 }
