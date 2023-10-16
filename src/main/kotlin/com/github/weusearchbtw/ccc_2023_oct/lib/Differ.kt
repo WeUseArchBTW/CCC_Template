@@ -5,6 +5,9 @@ import org.eclipse.jgit.diff.HistogramDiff
 import org.eclipse.jgit.diff.RawText
 import org.eclipse.jgit.diff.RawTextComparator
 import java.io.ByteArrayOutputStream
+import java.nio.file.Files
+import java.nio.file.Path
+import java.util.stream.Collectors
 import kotlin.collections.plus
 
 object Differ {
@@ -32,9 +35,11 @@ object Differ {
 		}
 
 		// fallback for non-linux systems
+		val output = Files.lines(Path.of(outputFile)).collect(Collectors.joining("\n"))
+
 		val out = ByteArrayOutputStream()
 		val rt1 = RawText(expected.toByteArray(Charsets.UTF_8) + NEWLINE.toByte())
-		val rt2 = RawText(outputFile.toByteArray(Charsets.UTF_8) + NEWLINE.toByte())
+		val rt2 = RawText(output.toByteArray(Charsets.UTF_8) + NEWLINE.toByte())
 		val diffList = HistogramDiff().diff(RawTextComparator.DEFAULT, rt1, rt2)
 		DiffFormatter(out).format(diffList, rt1, rt2)
 		println(out.toString(Charsets.UTF_8.name()))
