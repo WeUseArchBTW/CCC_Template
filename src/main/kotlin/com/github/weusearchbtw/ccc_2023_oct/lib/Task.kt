@@ -12,11 +12,11 @@ abstract class Task(val debug: Boolean = false) {
 			runSubTask(index, "example")
 
 			val expectedOutputFile = "expected/level${index}_expected.in"
-			val output = Files.readAllLines(Path.of("output/level${index}_example.out"))
+			val outputFile = "output/level${index}_example.out"
 			val expectedOutputFallback = Files.lines(Path.of(expectedOutputFile)).collect(Collectors.joining("\n"))
 
 			println("\n--------------Diff-------------")
-			Differ.printDiff(expectedOutputFile, output.joinToString ("\n"), expectedOutputFallback)
+			Differ.printDiff(expectedOutputFile, outputFile, expectedOutputFallback)
 			return
 		}
 
