@@ -11,7 +11,7 @@ abstract class Task(val debug: Boolean = false) {
 		if (debug) {
 			runSubTask(index, "example")
 
-			val expectedOutputFile = "expected/level${index}_expected.in"
+			val expectedOutputFile = "expected/level${index}_example.out"
 			val outputFile = "output/level${index}_example.out"
 			val expectedOutputFallback = Files.lines(Path.of(expectedOutputFile)).collect(Collectors.joining("\n"))
 
@@ -20,7 +20,7 @@ abstract class Task(val debug: Boolean = false) {
 			return
 		}
 
-		for (i in 0..<5) {
+		for (i in 1.. 5) {
 			runSubTask(index, i)
 		}
 	}
