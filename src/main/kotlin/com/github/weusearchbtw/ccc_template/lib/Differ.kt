@@ -1,4 +1,4 @@
-package com.github.weusearchbtw.ccc_2023_oct.lib
+package com.github.weusearchbtw.ccc_template.lib
 
 import org.eclipse.jgit.diff.DiffFormatter
 import org.eclipse.jgit.diff.HistogramDiff

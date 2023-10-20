@@ -1,4 +1,4 @@
-package com.github.weusearchbtw.ccc_2023_oct.lib
+package com.github.weusearchbtw.ccc_template.lib
 
 import java.nio.file.Files
 import java.nio.file.Path
