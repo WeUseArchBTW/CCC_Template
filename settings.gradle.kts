@@ -1,1 +1,1 @@
-rootProject.name = "ccc_2023_oct"
+rootProject.name = "ccc_template"
